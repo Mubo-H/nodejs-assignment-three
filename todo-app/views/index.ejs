@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+  </head>
+  <body>
+    <h1>Todo List</h1>
+    <form action="/tasks" method="POST">
+      <input type="text" name="title" placeholder="New task" required />
+      <button type="submit">Add Task</button>
+    </form>
+
+    <h2>Pending Tasks</h2>
+    <ul>
+      <% tasks.filter(task => task.status === 'pending').forEach(task => { %>
+      <li>
+        <%= task.title %> -
+        <a href="/tasks/<%= task._id %>?status=completed">Complete</a> |
+        <a href="/tasks/<%= task._id %>?status=deleted">Delete</a>
+      </li>
+      <% }) %>
+    </ul>
+
+    <h2>Completed Tasks</h2>
+    <ul>
+      <% tasks.filter(task => task.status === 'completed').forEach(task => { %>
+      <li><%= task.title %></li>
+      <% }) %>
+    </ul>
+  </body>
+</html>
